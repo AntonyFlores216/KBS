@@ -1,1 +1,71 @@
-
+(deftemplate disease
+(slot name)
+(multislot signs)
+(multislot symtoms)
+)
+CLIPS> (assert(disease(name "H1N1")
+(signs "Chest_Pain" "Difficulty_Breathing")
+(symtoms "Dizziness" "Weakness")))
+<Fact-1>
+CLIPS> (assert(disease(name "COVID-19")
+(signs "Fever" "Fatigue")
+(symtoms "Headache" "Loss_of_taste")))
+<Fact-2>
+CLIPS> (assert(disease(name "COVID-19")
+(signs "Fever" "Fatigue")
+(symtoms "Headache" "Loss_of_taste")))
+<Fact-2>
+CLIPS> (assert(disease(name "Gastritis")
+(signs "Stomachache" "Vomit")
+(symtoms "Stomachache" "Loss_of_appetite")))
+<Fact-3>
+CLIPS> (assert(disease(name "Obesidad")
+(signs "Weight_gain" "Cramps")
+(symtoms "Fatigue" "Swelling")))
+<Fact-4>
+CLIPS> (assert(disease(name "Diabetes")
+(signs "Increased_thirst" "Blurred_vision")
+(symtoms "Ulcers" "Tingling")))
+<Fact-5>
+CLIPS> (assert(disease(name "Neumonia")
+(signs "Cough" "Fever")
+(symtoms "Stabbing_chest" "Shallow_breathing")))
+<Fact-6>
+CLIPS> (defrule search-disease "search"
+(disease(name ?i) (signs $?j) (symtoms $?k))
+=>
+(printout t "*****************" crlf "[-]disease" ?i crlf "-signs:" ?j crlf "- symptoms:" ?k crlf)
+)
+CLIPS> (agenda)
+0      search-disease: f-6
+0      search-disease: f-5
+0      search-disease: f-4
+0      search-disease: f-3
+0      search-disease: f-2
+0      search-disease: f-1
+For a total of 6 activations.
+CLIPS> (run)
+*****************
+[-]diseaseNeumonia
+-signs:("Cough" "Fever")
+- symptoms:("Stabbing_chest" "Shallow_breathing")
+*****************
+[-]diseaseDiabetes
+-signs:("Increased_thirst" "Blurred_vision")
+- symptoms:("Ulcers" "Tingling")
+*****************
+[-]diseaseObesidad
+-signs:("Weight_gain" "Cramps")
+- symptoms:("Fatigue" "Swelling")
+*****************
+[-]diseaseGastritis
+-signs:("Stomachache" "Vomit")
+- symptoms:("Stomachache" "Loss_of_appetite")
+*****************
+[-]diseaseCOVID-19
+-signs:("Fever" "Fatigue")
+- symptoms:("Headache" "Loss_of_taste")
+*****************
+[-]diseaseH1N1
+-signs:("Chest_Pain" "Difficulty_Breathing")
+- symptoms:("Dizziness" "Weakness")

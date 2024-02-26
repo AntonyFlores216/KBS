@@ -69,3 +69,13 @@ CLIPS> (run)
 [-]diseaseH1N1
 -signs:("Chest_Pain" "Difficulty_Breathing")
 - symptoms:("Dizziness" "Weakness")
+
+--------------------------------------------------------------------------------
+(defrule remove-disease
+   "Rule to remove a disease fact"
+   ?fact <- (disease (name ?name))
+   =>
+   (printout t "Removing disease: " ?name crlf)
+   (retract ?fact)
+)
+remove??????
